@@ -14,4 +14,4 @@ Android Application that displays pictures and allows the end-user to choose and
 
 #### REST API - YourFav
 
-#### DataBase - YourFavifferents move to the AI agent regarding the environment's state. pour commit
+#### DataBase - YourFav
