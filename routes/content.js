@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Content = require('../src/Content');
+var pixabay = require('pixabay-api'); // picture api
+const AUTH_KEY = '7847802-34ec22dbc687fdf94827eaac2'
 
 router.get('/:id?',function(req,res,next) {
 
@@ -16,16 +18,13 @@ router.get('/:id?',function(req,res,next) {
   } 
   // if id is not passed : common list of content
   else {
-    Content.getAllContents(function(err,rows) {
-      if (err) {
-        res.json(err);
-      } else {
-        res.json(rows);
-      }
-    });
+    pixabay.searchImages(AUTH_KEY, 'puppy')
+      .then((r) => res.json(r))
+      .catch(function(error) {
+        res.json(error);
+      });
   }
 });
-
 
 // adding a content to list of user's favorite
 router.post('/',function(req,res,next) {

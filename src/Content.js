@@ -1,12 +1,9 @@
 var db = require('./dbconnection'); //reference of dbconnection.js
- 
+
 var content={
 
 	ping:function(callback){
 		return JSON.stringify({status: 'okay buddy'});
-	},
-	getAllContents:function(callback){
-		return db.query("select * from content", callback);
 	},
 	getFavoritesByUserId:function(id, callback){
 		return db.query("select * from favorite where `user`=?",[id],callback);
