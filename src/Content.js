@@ -6,10 +6,11 @@ var content={
 		return JSON.stringify({status: 'okay buddy'});
 	},
 	getFavoritesByUserId:function(id, callback){
-		return db.query("select * from favorite where `user`=?",[id],callback);
+		return db.query("select * from favorite" +
+			" where `user`= ? ",[id],callback);
 	},
-	addFavorite:function(user,content,callback){
-		return db.query("Insert into `content` values(?,?)",[user,content],callback);
+	addFavoriteByUserandContentId:function(contentId,contentUrl,userId,callback){
+		return db.query("Insert into `favorite` values(?,?,?)",[contentId,contentUrl,userId],callback);
 	}/*,
 	/deleteTask:function(id,callback){
 		return db.query("delete from task where Id=?",[id],callback);

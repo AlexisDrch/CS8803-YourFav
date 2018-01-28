@@ -29,7 +29,7 @@ router.get('/:id?',function(req,res,next) {
 // adding a content to list of user's favorite
 router.post('/',function(req,res,next) {
 
-  Content.addFavorite(req.body,function(err,count) {
+  Content.addFavoriteByUserandContentId(req.body,function(err,count) {
     if(err) {
       res.json(err);
     } else {
