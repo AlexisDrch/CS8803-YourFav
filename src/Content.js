@@ -9,8 +9,9 @@ var content={
 		return db.query("select * from favorite" +
 			" where `user`= ? ",[id],callback);
 	},
-	addFavoriteByUserandContentId:function(contentId,contentUrl,userId,callback){
-		return db.query("Insert into `favorite` values(?,?,?)",[contentId,contentUrl,userId],callback);
+	addFavoriteByUserandContentId:function(content,callback){
+		console.log(content)
+		return db.query("Insert into `favorite` values(?,?,?)",[content.id,content.url,content.user],callback);
 	}/*,
 	/deleteTask:function(id,callback){
 		return db.query("delete from task where Id=?",[id],callback);
