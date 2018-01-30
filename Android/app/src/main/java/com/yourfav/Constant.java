@@ -6,5 +6,5 @@ package com.yourfav;
 
 public class Constant {
 
-    public static final String API_URL = "http://10.0.2.2:3000/Content";
+   public static final String API_URL = "http://10.0.2.2:3000/Content";
 }
