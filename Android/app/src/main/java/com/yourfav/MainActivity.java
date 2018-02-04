@@ -1,11 +1,13 @@
 package com.yourfav;
 
+import android.graphics.Bitmap;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -13,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity{
      */
     private void getMyPictures() {
         String url = Constant.API_URL;
-        StringRequest getCellarRequest = new StringRequest(Request.Method.GET,
+        StringRequest getPictureListRequest = new StringRequest(Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
                     @Override
@@ -70,11 +73,42 @@ public class MainActivity extends AppCompatActivity{
                             JSONArray hits = jsonObject.getJSONArray("hits");
                             for (int i = 0; i< hits.length();i++){
                                 JSONObject image = hits.getJSONObject(i);
-                               // Picture picture = new Picture(image.getString("previewURL"));
-                                Picture picture = new Picture();
+
+                                final Picture picture = new Picture((ImageView)findViewById(R.id.my_image_view));
+                                picture.setUrl(image.getString("previewURL"));
+
+                                // Initialize a new RequestQueue instance
+                                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+                                // Initialize a new ImageRequest
+                                ImageRequest imageRequest = new ImageRequest(
+                                        picture.getUrl(), // Image URL
+                                        new Response.Listener<Bitmap>() { // Bitmap listener
+                                            @Override
+                                            public void onResponse(Bitmap response) {
+                                                // Do something with response
+                                                picture.getImView().setImageBitmap(response);
+                                            }
+                                        },
+                                        0, // Image width
+                                        0, // Image height
+                                        ImageView.ScaleType.CENTER_CROP, // Image scale type
+                                        Bitmap.Config.RGB_565, //Image decode configuration
+                                        new Response.ErrorListener() { // Error listener
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                // Do something with error response
+                                                error.printStackTrace();
+                                                //Snackbar.make(mCLayout,"Error",Snackbar.LENGTH_LONG).show();
+                                            }
+                                        }
+                                );
+
+                                // Add ImageRequest to the RequestQueue
+                                requestQueue.add(imageRequest);
+
                                 Toast.makeText(getApplicationContext(), "requete get", Toast.LENGTH_LONG).show();
-                                System.out.println(picture);
-                                System.out.println(i);
+                                Log.e(TAG,"requete get");
                                 pictureList.add(picture);
                             }
                         } catch (JSONException e) {
@@ -83,13 +117,14 @@ public class MainActivity extends AppCompatActivity{
 
                         // Hide progress bar
                         pgbLoading.setVisibility(View.GONE);
+
                         // Display picture list fragment
                         displayPictureList();
                     }
                 },
                 simpleErrorListener);
 
-        requestQueue.add(getCellarRequest);
+        requestQueue.add(getPictureListRequest);
     }
 
     /**
@@ -98,7 +133,7 @@ public class MainActivity extends AppCompatActivity{
     private Response.ErrorListener simpleErrorListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            Log.e(TAG, error.getLocalizedMessage());
+            Log.e(TAG, " "+error.getLocalizedMessage());
         }
     };
 }

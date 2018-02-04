@@ -30,7 +30,7 @@ public class PictureAdapter extends ArrayAdapter<Picture> {
 
         Picture pictureToDisplay = getItem(position);
 
-        image.setImageResource(R.drawable.yellow_flower);
+        //image.setImageResource(R.drawable.yellow_flower);
       //  image.setImageDrawable(pictureToDisplay.getDrawable());
         /*Picture pictureToDisplay = getItem(position);
         RL url = new URL("http://www.google.com"); //Some instantiated URL object
