@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -27,11 +28,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 
+    ListView pictureListView;
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private ArrayList<Picture> pictureList = new ArrayList<>();
-    private FragmentManager fragmentManager;
-    private ProgressBar pgbLoading;
 
     private RequestQueue requestQueue;
 
@@ -39,22 +39,19 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         requestQueue = Volley.newRequestQueue(MainActivity.this);
 
-        pgbLoading = (ProgressBar) findViewById(R.id.a_main_pgb_loading);
+        pictureListView = (ListView) findViewById(R.id.listView);
 
-        fragmentManager = getSupportFragmentManager();
-
-        // Get info about my cellar
+        // Get list of pictures
         getMyPictures();
-    }
 
-    private void displayPictureList() {
-        // Create a fragment using factory method
-        PictureListFragment pictureListFragment = PictureListFragment.newInstance(pictureList);
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.a_main_lyt_fragment_container, pictureListFragment);
-        transaction.commit();
+
+
+        PictureAdapter adapter = new PictureAdapter(MainActivity.this,pictureList);
+        pictureListView.setAdapter(adapter);
+
     }
 
     /**
@@ -74,9 +71,10 @@ public class MainActivity extends AppCompatActivity{
                             for (int i = 0; i< hits.length();i++){
                                 JSONObject image = hits.getJSONObject(i);
 
-                                final Picture picture = new Picture((ImageView)findViewById(R.id.my_image_view));
+                                final Picture picture = new Picture(image.getString("previewURL"));
+                                /*final Picture picture = new Picture((ImageView)findViewById(R.id.my_image_view));
                                 picture.setUrl(image.getString("previewURL"));
-
+*/
                                 // Initialize a new RequestQueue instance
                                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity{
                                             @Override
                                             public void onResponse(Bitmap response) {
                                                 // Do something with response
-                                                picture.getImView().setImageBitmap(response);
+                                                picture.setBitmap(response);
                                             }
                                         },
                                         0, // Image width
@@ -115,11 +113,7 @@ public class MainActivity extends AppCompatActivity{
                             e.printStackTrace();
                         }
 
-                        // Hide progress bar
-                        pgbLoading.setVisibility(View.GONE);
 
-                        // Display picture list fragment
-                        displayPictureList();
                     }
                 },
                 simpleErrorListener);

@@ -1,35 +1,43 @@
 package com.yourfav;
 
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
+import android.graphics.Bitmap;
+
 
 import java.io.Serializable;
 
+import static android.graphics.Bitmap.createBitmap;
+
 public class Picture implements Serializable {
 
-    private ImageView image;
+    //private ImageView image;
     private String url;
+    private Bitmap bm = createBitmap(50, 50, Bitmap.Config.ARGB_8888);
 
-    public Picture(ImageView image) {
-        //temporary (until API works)
-        this.image=image;
-        //this.image.setImageResource(R.drawable.yellow_flower);
-        //this.image = image;
+    public Picture(/*ImageView image*/String url) {
+
+        //this.image=image;
+        this.url=url;
     }
 
-    public Drawable getDrawable(){
-        return image.getDrawable();
-    }
-
-    public ImageView getImView(){
+    /* public ImageView getImView(){
         return image;
+    }
+    */
+
+    public String getUrl(){
+        return url;
     }
 
     public void setUrl(String url){
         this.url=url;
     }
 
-    public String getUrl(){
-            return url;}
+    public Bitmap getBitmap(){
+        return bm;
+    }
+
+    public void setBitmap(Bitmap bm){
+        this.bm=bm;
+    }
 }
 
