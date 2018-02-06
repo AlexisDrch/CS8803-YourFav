@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -38,7 +41,18 @@ public class PictureAdapter extends ArrayAdapter<Picture> {
         if (viewHolder == null){
             viewHolder = new PictureViewHolder();
             viewHolder.picture = (ImageView) convertView.findViewById(R.id.picture);
-            viewHolder.button = (TextView) convertView.findViewById(R.id.button);
+            viewHolder.button = (Button) convertView.findViewById(R.id.button);
+            viewHolder.button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    //get the row the clicked button is in
+                    RelativeLayout vwParentRow = (RelativeLayout)v.getParent();
+
+                    Button btnChild = (Button)vwParentRow.getChildAt(1);
+                    btnChild.setText("I've been clicked!");
+
+                }
+            });
             convertView.setTag(viewHolder);
         }
 

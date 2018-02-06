@@ -1,11 +1,16 @@
 package com.yourfav;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -74,7 +79,7 @@ public class MainActivity extends AppCompatActivity{
      *
      */
     private void getMyPictures() {
-        String url = Constant.API_URL;
+        String url = Constant.API_URL_GET;
         StringRequest getPictureListRequest = new StringRequest(Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
@@ -146,4 +151,16 @@ public class MainActivity extends AppCompatActivity{
             Log.e(TAG, " "+error.getLocalizedMessage());
         }
     };
+
+    public void myClickHandler(View v)
+    {
+        //get the row the clicked button is in
+        LinearLayout vwParentRow = (LinearLayout)v.getParent();
+
+        TextView child = (TextView)vwParentRow.getChildAt(0);
+        Button btnChild = (Button)vwParentRow.getChildAt(1);
+        btnChild.setText(child.getText());
+        btnChild.setText("I've been clicked!");
+    }
 }
+
