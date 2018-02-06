@@ -11,7 +11,7 @@ public class Picture implements Serializable {
 
     //private ImageView image;
     private String url;
-    private Bitmap bm = createBitmap(50, 50, Bitmap.Config.ARGB_8888);
+    private Bitmap bm ;
 
     public Picture(/*ImageView image*/String url) {
 

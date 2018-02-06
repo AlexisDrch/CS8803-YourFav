@@ -1,15 +1,11 @@
 package com.yourfav;
 
 import android.graphics.Bitmap;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,13 +21,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
 
     ListView pictureListView;
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private ArrayList<Picture> pictureList = new ArrayList<>();
+    private ArrayList<Picture> pictures = new ArrayList<>();
 
     private RequestQueue requestQueue;
 
@@ -45,12 +42,30 @@ public class MainActivity extends AppCompatActivity{
         pictureListView = (ListView) findViewById(R.id.listView);
 
         // Get list of pictures
-        getMyPictures();
+        getMyPictures2();
 
 
 
-        PictureAdapter adapter = new PictureAdapter(MainActivity.this,pictureList);
+        PictureAdapter adapter = new PictureAdapter(MainActivity.this, pictures);
         pictureListView.setAdapter(adapter);
+
+    }
+    /**
+     * Just temporary to ckeck the listview
+     */
+    private List<Picture> getMyPictures2(){
+        getMyPictures();
+        pictures.add(new Picture("http://www.telegraph.co.uk/travel/destination/article130148.ece/ALTERNATES/w620/parisguidetower.jpg"));
+        pictures.add(new Picture("http://www.traditours.com/images/Photos%20Angleterre/ForumLondonBridge.jpg"));
+        pictures.add(new Picture("http://tanned-allemagne.com/wp-content/uploads/2012/10/pano_rathaus_1280.jpg"));
+        pictures.add(new Picture("http://www.sejour-linguistique-lec.fr/wp-content/uploads/espagne-02.jpg"));
+        pictures.add(new Picture("http://retouralinnocence.com/wp-content/uploads/2013/05/Hotel-en-Italie-pour-les-Vacances2.jpg"));
+        pictures.add(new Picture("http://www.choisir-ma-destination.com/uploads/_large_russie-moscou2.jpg"));
+
+        for (Picture pic : pictures){
+               // pic.setBitmap();
+            }
+            return pictures;
 
     }
 
@@ -76,7 +91,7 @@ public class MainActivity extends AppCompatActivity{
                                 picture.setUrl(image.getString("previewURL"));
 */
                                 // Initialize a new RequestQueue instance
-                                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                                RequestQueue requestQueuePicture = Volley.newRequestQueue(getApplicationContext());
 
                                 // Initialize a new ImageRequest
                                 ImageRequest imageRequest = new ImageRequest(
@@ -88,8 +103,8 @@ public class MainActivity extends AppCompatActivity{
                                                 picture.setBitmap(response);
                                             }
                                         },
-                                        0, // Image width
-                                        0, // Image height
+                                        50, // Image width
+                                        50, // Image height
                                         ImageView.ScaleType.CENTER_CROP, // Image scale type
                                         Bitmap.Config.RGB_565, //Image decode configuration
                                         new Response.ErrorListener() { // Error listener
@@ -103,11 +118,11 @@ public class MainActivity extends AppCompatActivity{
                                 );
 
                                 // Add ImageRequest to the RequestQueue
-                                requestQueue.add(imageRequest);
+                                requestQueuePicture.add(imageRequest);
 
                                 Toast.makeText(getApplicationContext(), "requete get", Toast.LENGTH_LONG).show();
                                 Log.e(TAG,"requete get");
-                                pictureList.add(picture);
+                                pictures.add(picture);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -119,6 +134,7 @@ public class MainActivity extends AppCompatActivity{
                 simpleErrorListener);
 
         requestQueue.add(getPictureListRequest);
+
     }
 
     /**

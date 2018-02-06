@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -44,7 +46,10 @@ public class PictureAdapter extends ArrayAdapter<Picture> {
 
         //fill our view
         viewHolder.button.setText("Add to fav");
-        viewHolder.picture.setImageBitmap(pictureToDisplay.getBitmap());
+        //viewHolder.picture.setImageBitmap(pictureToDisplay.getBitmap());
+        //viewHolder.picture.setImageResource(R.drawable.yellow_flower);
+        Picasso.with(viewHolder.picture.getContext()).load(pictureToDisplay.getUrl()).centerCrop().fit().into(viewHolder.picture);
+
 
         return convertView;
     }
