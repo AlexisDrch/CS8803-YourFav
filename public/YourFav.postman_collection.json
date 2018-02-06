@@ -1,0 +1,147 @@
+{
+	"id": "c1dc2d68-2514-1e83-c34d-a2b82b37eeb2",
+	"name": "YourFav",
+	"description": "",
+	"order": [
+		"8a37a8a0-17d8-ceca-8806-558e3f8beb07",
+		"646c806d-720b-2d28-e096-56f129185e21",
+		"c07fbb47-9b42-61e3-ff37-9315579a27af",
+		"5f6791c1-828d-3e4b-97aa-a6a009e5ce71"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1517148206307,
+	"owner": "1414690",
+	"public": false,
+	"requests": [
+		{
+			"id": "5f6791c1-828d-3e4b-97aa-a6a009e5ce71",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:3000/Content/1",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "c1dc2d68-2514-1e83-c34d-a2b82b37eeb2",
+			"data": null,
+			"dataMode": "params",
+			"name": "http://localhost:3000/Content/1",
+			"description": "GET all favorites of user 1",
+			"descriptionFormat": "html",
+			"time": 1517148427085,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "646c806d-720b-2d28-e096-56f129185e21",
+			"headers": "Content-Type: application/json; charset=UTF-8\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json; charset=UTF-8",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/Content",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "c1dc2d68-2514-1e83-c34d-a2b82b37eeb2",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:3000/Content",
+			"description": "Post a new favorite to the current user",
+			"descriptionFormat": "html",
+			"time": 1517148306527,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"id\" : \"1903313\",\n\t\"url\": \"https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313_150.jpg\",\n\t\"user\": 2\n}\n\t"
+		},
+		{
+			"id": "8a37a8a0-17d8-ceca-8806-558e3f8beb07",
+			"headers": "Content-Type: application/json; charset=UTF-8\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json; charset=UTF-8",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/User/",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "c1dc2d68-2514-1e83-c34d-a2b82b37eeb2",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:3000/User/",
+			"description": "Post a user with name and surname\n",
+			"descriptionFormat": "html",
+			"time": 1517148225454,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\t\n\t\"name\": \"Mark\",\n\t\"surname\": \"Sanders\"\n}"
+		},
+		{
+			"id": "c07fbb47-9b42-61e3-ff37-9315579a27af",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/Content",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [
+				{
+					"key": "id",
+					"value": "1903313",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "url",
+					"value": "https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313_150.jpg",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1517148618124,
+			"name": "http://localhost:3000/Content",
+			"description": "GET all contents from pixabay API\n",
+			"collectionId": "c1dc2d68-2514-1e83-c34d-a2b82b37eeb2",
+			"responses": []
+		}
+	]
+}

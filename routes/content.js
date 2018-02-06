@@ -18,7 +18,7 @@ router.get('/:id?',function(req,res,next) {
   } 
   // if id is not passed : common list of content
   else {
-    pixabay.searchImages(AUTH_KEY, 'puppy')
+    pixabay.searchImages(AUTH_KEY, 'hipster')
       .then((r) => res.json(r))
       .catch(function(error) {
         res.json(error);
@@ -29,7 +29,7 @@ router.get('/:id?',function(req,res,next) {
 // adding a content to list of user's favorite
 router.post('/',function(req,res,next) {
 
-  Content.addFavorite(req.body,function(err,count) {
+  Content.addFavoriteByUserandContentId(req.body,function(err,count) {
     if(err) {
       res.json(err);
     } else {

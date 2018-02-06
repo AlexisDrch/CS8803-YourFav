@@ -30,7 +30,7 @@ router.get('/:id?',function(req,res,next) {
 // adding a content to list of user's favorite
 router.post('/',function(req,res,next) {
 
-  User.addUserById(req.body,function(err,count) {
+  User.addUser(req.body,function(err,count) {
     if(err) {
       res.json(err);
     } else {

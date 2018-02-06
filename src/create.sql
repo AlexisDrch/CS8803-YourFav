@@ -1,17 +1,14 @@
 CREATE TABLE IF NOT EXISTS `user` (
- `id` varchar(50) NOT NULL AUTO_INCREMENT,
+ `id` int NOT NULL AUTO_INCREMENT,
  `name` varchar(500) DEFAULT NULL,
  `surname` varchar(500) DEFAULT NULL,
  PRIMARY KEY (`Id`)
  );
  
- CREATE TABLE IF NOT EXISTS `content` (
- `id` varchar(50) NOT NULL AUTO_INCREMENT,
+ CREATE TABLE IF NOT EXISTS `favorite` (
+ `id` varchar(50) NOT NULL,
+ `url` varchar(1000) NOT NULL,
+ `user` int NOT NULL references `user`,
  PRIMARY KEY (`Id`)
  );
  
- CREATE TABLE IF NOT EXISTS `favorite` (
-`user` varchar(50) NOT NULL references `user`,
-`content` varchar(50) NOT NULL references `content`,
-PRIMARY KEY (`user`, `content`)
-);

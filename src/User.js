@@ -8,8 +8,8 @@ var user={
 	getUserById:function(id, callback){
 		return db.query("select * from `user` where id =?",[id],callback);
 	},
-	addUserById:function(user,content,callback){
-		return db.query("Insert into `user` values(?,?,.)",[id,name,surname],callback);
+	addUser:function(user,callback){
+		return db.query("Insert into `user` values(?,?,?)",[null, user.name,user.surname],callback);
 	}/*,
 	/deleteTask:function(id,callback){
 		return db.query("delete from task where Id=?",[id],callback);
