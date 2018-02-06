@@ -73,7 +73,7 @@ public class PictureAdapter extends ArrayAdapter<Picture> {
                     Button btnChild = (Button)vwParentRow.getChildAt(1);
                     Picture pictureToDisplay = getItem(pos);
                     addFav(pictureToDisplay);
-                    btnChild.setText(pictureToDisplay.getUrl());
+                    btnChild.setText("Added to your favorites");
 
                 }
             });
@@ -83,7 +83,7 @@ public class PictureAdapter extends ArrayAdapter<Picture> {
         Picture pictureToDisplay = getItem(position);
 
         //fill our view
-        viewHolder.button.setText("Add to fav");
+        viewHolder.button.setText("Like");
         //viewHolder.picture.setImageBitmap(pictureToDisplay.getBitmap());
         //viewHolder.picture.setImageResource(R.drawable.yellow_flower);
         Picasso.with(viewHolder.picture.getContext()).load(pictureToDisplay.getUrl()).centerCrop().fit().into(viewHolder.picture);
