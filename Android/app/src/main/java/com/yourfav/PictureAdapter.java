@@ -127,6 +127,7 @@ public class PictureAdapter extends ArrayAdapter<Picture> {
                 }
             }
 
+
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
                 String responseString = "";
