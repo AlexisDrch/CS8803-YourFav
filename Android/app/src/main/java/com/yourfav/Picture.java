@@ -11,12 +11,13 @@ public class Picture implements Serializable {
 
     //private ImageView image;
     private String url;
-    private Bitmap bm ;
+    private int id ;
 
-    public Picture(/*ImageView image*/String url) {
+    public Picture(/*ImageView image*/String url,int id) {
 
         //this.image=image;
         this.url=url;
+        this.id=id;
     }
 
     /* public ImageView getImView(){
@@ -32,12 +33,12 @@ public class Picture implements Serializable {
         this.url=url;
     }
 
-    public Bitmap getBitmap(){
-        return bm;
+    public int getId(){
+        return id;
     }
 
-    public void setBitmap(Bitmap bm){
-        this.bm=bm;
+    public void setId(int id){
+        this.id=id;
     }
 }
 

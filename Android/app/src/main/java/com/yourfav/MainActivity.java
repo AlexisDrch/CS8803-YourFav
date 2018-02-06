@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity{
      */
     private List<Picture> getMyPictures2(){
         getMyPictures();
-        pictures.add(new Picture("http://www.telegraph.co.uk/travel/destination/article130148.ece/ALTERNATES/w620/parisguidetower.jpg"));
-        pictures.add(new Picture("http://www.traditours.com/images/Photos%20Angleterre/ForumLondonBridge.jpg"));
-        pictures.add(new Picture("http://tanned-allemagne.com/wp-content/uploads/2012/10/pano_rathaus_1280.jpg"));
-        pictures.add(new Picture("http://www.sejour-linguistique-lec.fr/wp-content/uploads/espagne-02.jpg"));
-        pictures.add(new Picture("http://retouralinnocence.com/wp-content/uploads/2013/05/Hotel-en-Italie-pour-les-Vacances2.jpg"));
-        pictures.add(new Picture("http://www.choisir-ma-destination.com/uploads/_large_russie-moscou2.jpg"));
+        pictures.add(new Picture("http://www.telegraph.co.uk/travel/destination/article130148.ece/ALTERNATES/w620/parisguidetower.jpg",1));
+        pictures.add(new Picture("http://www.traditours.com/images/Photos%20Angleterre/ForumLondonBridge.jpg",2));
+        pictures.add(new Picture("http://tanned-allemagne.com/wp-content/uploads/2012/10/pano_rathaus_1280.jpg",3));
+        pictures.add(new Picture("http://www.sejour-linguistique-lec.fr/wp-content/uploads/espagne-02.jpg",4));
+        pictures.add(new Picture("http://retouralinnocence.com/wp-content/uploads/2013/05/Hotel-en-Italie-pour-les-Vacances2.jpg",5));
+        pictures.add(new Picture("http://www.choisir-ma-destination.com/uploads/_large_russie-moscou2.jpg",6));
 
         for (Picture pic : pictures){
                // pic.setBitmap();
@@ -91,39 +91,9 @@ public class MainActivity extends AppCompatActivity{
                             for (int i = 0; i< hits.length();i++){
                                 JSONObject image = hits.getJSONObject(i);
 
-                                final Picture picture = new Picture(image.getString("previewURL"));
+                                final Picture picture = new Picture(image.getString("previewURL"),image.getInt("id"));
                                 /*final Picture picture = new Picture((ImageView)findViewById(R.id.my_image_view));
-                                picture.setUrl(image.getString("previewURL"));
-*/
-                                // Initialize a new RequestQueue instance
-                                RequestQueue requestQueuePicture = Volley.newRequestQueue(getApplicationContext());
-
-                                // Initialize a new ImageRequest
-                                ImageRequest imageRequest = new ImageRequest(
-                                        picture.getUrl(), // Image URL
-                                        new Response.Listener<Bitmap>() { // Bitmap listener
-                                            @Override
-                                            public void onResponse(Bitmap response) {
-                                                // Do something with response
-                                                picture.setBitmap(response);
-                                            }
-                                        },
-                                        50, // Image width
-                                        50, // Image height
-                                        ImageView.ScaleType.CENTER_CROP, // Image scale type
-                                        Bitmap.Config.RGB_565, //Image decode configuration
-                                        new Response.ErrorListener() { // Error listener
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                // Do something with error response
-                                                error.printStackTrace();
-                                                //Snackbar.make(mCLayout,"Error",Snackbar.LENGTH_LONG).show();
-                                            }
-                                        }
-                                );
-
-                                // Add ImageRequest to the RequestQueue
-                                requestQueuePicture.add(imageRequest);
+                                picture.setUrl(image.getString("previewURL"));*/
 
                                 Toast.makeText(getApplicationContext(), "requete get", Toast.LENGTH_LONG).show();
                                 Log.e(TAG,"requete get");
